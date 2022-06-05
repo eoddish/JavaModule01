@@ -6,7 +6,7 @@ public class TransactionsLinkedList implements TransactionsList {
 
     public void addTransaction(Transaction transaction) {
         Transaction newtransaction = new Transaction(transaction);
-       newtransaction.next = first;
+       newtransaction.setNext(first);
        first = newtransaction;
        size++;
     }
@@ -15,17 +15,17 @@ public class TransactionsLinkedList implements TransactionsList {
             throw new TransactionNotFoundException("TransactionNotFound");
         Transaction temp = first;
         if (first.getIdentifier() == uuid) {
-            first = first.next;
+            first = first.getNext();
             size--;
             return;
         }
-        while (temp != null && temp.next != null) {
-            if (temp.next.getIdentifier() == uuid) {
-                temp.next = temp.next.next;
+        while (temp != null && temp.getNext() != null) {
+            if (temp.getNext().getIdentifier() == uuid) {
+                temp.setNext(temp.getNext().getNext());
                 size--;
                 return;
             }
-            temp = temp.next;
+            temp = temp.getNext();
         }
         throw new TransactionNotFoundException("TransactionNotFound");
     }
@@ -34,7 +34,7 @@ public class TransactionsLinkedList implements TransactionsList {
         Transaction temp = first;
         for (int i = 0; i < this.size && temp != null; i++) {
             result[i] = temp;
-            temp = temp.next;
+            temp = temp.getNext();
         }
 
         return result;

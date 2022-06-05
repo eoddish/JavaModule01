@@ -12,9 +12,18 @@ public class Transaction {
     private UUID Identifier;
     private User Recipient;
     private User Sender;
+
+    public Transaction getNext() {
+        return next;
+    }
+
+    public void setNext(Transaction next) {
+        this.next = next;
+    }
+
     private TransferCategory transferCategory;
     private Integer transferAmount;
-    public Transaction next;
+    private Transaction next;
 
     public Transaction(User recipient, User sender, Integer transferAmount) {
         Recipient = recipient;
@@ -28,6 +37,14 @@ public class Transaction {
 
     }
 
+    public Transaction(Transaction copy) {
+        this.Identifier = copy.Identifier;
+        this.Recipient = copy.getRecipient();
+        this.Sender = copy.getSender();
+        this.transferCategory = copy.getTransferCategory();
+        this.transferAmount = copy.getTransferAmount();
+        this.next = copy.getNext();
+    }
 
     public Transaction(UUID identifier) {
         Identifier = identifier;

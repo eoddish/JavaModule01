@@ -20,7 +20,8 @@ public class TransactionsService {
         transaction2.setIdentifier(transaction1.getIdentifier());
         usersList.getUserById(recipient).getTransactionsList().addTransaction(transaction1);
         usersList.getUserById(sender).getTransactionsList().addTransaction(transaction2);
-
+        usersList.getUserById(recipient).setBalance(usersList.getUserById(recipient).getBalance() + transferAmount);
+        usersList.getUserById(sender).setBalance(usersList.getUserById(sender).getBalance() - transferAmount);
     }
     public Transaction[] retrieveTransfers(int userId) {
         return usersList.getUserById(userId).getTransactionsList().toArray();

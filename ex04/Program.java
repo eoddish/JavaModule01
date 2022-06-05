@@ -26,6 +26,7 @@ public class Program {
         System.out.println("Balance of B " + transactionsService.getBalance(B.getIdentifier()));
         transactionsService.transferTransaction(A.getIdentifier(), B.getIdentifier(), 1000);
         transactionsService.transferTransaction(A.getIdentifier(), B.getIdentifier(), -5000);
+        transactionsService.transferTransaction(B.getIdentifier(), A.getIdentifier(), 500);
         transactionsService.transferTransaction(A.getIdentifier(), B.getIdentifier(), 2000);
 
         Transaction transactions[] = transactionsService.retrieveTransfers(A.getIdentifier());
@@ -44,6 +45,10 @@ public class Program {
             System.out.print(", Transfer category: " + transactions[i].getTransferCategory());
             System.out.println(", Transfer amount: " + transactions[i].getTransferAmount());
         }
+
+        System.out.println("Balance of A " + transactionsService.getBalance(A.getIdentifier()));
+        System.out.println("Balance of B " + transactionsService.getBalance(B.getIdentifier()));
+
         System.out.println("Unpaired transactions before removal:");
         transactions = transactionsService.checkValidity();
         for (int i = 0; i < transactions.length; i++) {
